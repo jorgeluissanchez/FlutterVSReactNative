@@ -8,7 +8,7 @@ Proyecto de la asignatura de desarrollo móvil: la misma aplicación implementad
 
 | Carpeta | Stack | Descripción |
 |---------|--------|-------------|
-| [`RNComaparacionDemo`](./RNComaparacionDemo) | React Native + Expo | App **GamesExplorer RN** |
+| [`RNComaparacionDemo`](./RNComparationDemo) | React Native + Expo | App **GamesExplorer RN** |
 | [`FlutterComparationDemo`](./FlutterComparationDemo) | Flutter | App **GamesExplorer Flutter** |
 
 ---
@@ -29,27 +29,6 @@ Proyecto de la asignatura de desarrollo móvil: la misma aplicación implementad
 | React Native | React Query | Context + `useReducer` |
 | Flutter | Caché en `IgdbService` | Provider + `ChangeNotifier` |
 
----
-
-## Variables de entorno
-
-Cada proyecto tiene su propio `.env` (copiar desde `.env.example`).
-
-**React Native (Expo):**
-```env
-EXPO_PUBLIC_IGDB_CLIENT_ID=tu_client_id
-EXPO_PUBLIC_IGDB_AUTH_TOKEN=Bearer tu_access_token
-```
-
-**Flutter:**
-```env
-IGDB_CLIENT_ID=tu_client_id
-IGDB_AUTH_TOKEN=Bearer tu_access_token
-```
-
-Reinicia el servidor de desarrollo después de modificar el `.env`.
-
----
 
 ## Cómo ejecutar
 
@@ -65,12 +44,12 @@ Abrir con **Expo Go** escaneando el QR (misma red Wi‑Fi).
 
 ### GamesExplorer Flutter
 
-**No ejecutar en Chrome/Edge (web):** IGDB bloquea las peticiones por CORS → `ClientException: Failed to fetch`.
+**No ejecutar en Chrome/Edge (web) sin antes descargar una extension para evitar el bloqueo por CORS:** IGDB bloquea las peticiones por CORS → `ClientException: Failed to fetch`.
 
 ```bash
 cd FlutterComparationDemo
 flutter pub get
-flutter run -d windows
+flutter run 
 ```
 
 O en Android: `flutter run -d android`
@@ -100,24 +79,25 @@ Medir desde la solicitud hasta que los datos se muestran en pantalla (promedio d
 
 | Escenario | React Native (ms) | Flutter (ms) |
 |-----------|-------------------|--------------|
-| Detalle de juego | | |
-| Búsqueda | | |
+| Detalle de juego | 470| 491|
+| Búsqueda | 2210|2236 |
 
 ### 3. Fluidez de la interfaz
 
 | Criterio | React Native | Flutter |
 |----------|--------------|---------|
-| Scroll en listas horizontales/verticales | | |
-| Navegación entre pantallas | | |
-| Evidencia (video / profiling) | | |
+| Scroll en listas horizontales/verticales |Fluido, sin saltos perceptibles |Fluido, con ligeras caídas en listas extensas |
+| Navegación entre pantallas | Transiciones rapidas| Transiciones rapidas|
+
+React Native en general se sintio ligeramente mas fluido.
 
 ### 4. Tiempo de compilación
 
 | Métrica | React Native | Flutter |
 |---------|--------------|---------|
-| Build release (primera vez) | | |
-| Build release (incremental) | | |
-| Recarga en desarrollo (hot reload / hot restart) | | |
+| Build release (primera vez) | 6 min 45 s| 8 min 36 s|
+| Build release (incremental) | 1 min 20 s| 1 min 45 s|
+| Recarga en desarrollo (hot reload / hot restart) | 2–3 s (Fast Refresh)| 1–2 s (Hot Reload)|
 
 ### 5. Cold start
 
@@ -125,14 +105,23 @@ Tiempo desde abrir la app (completamente cerrada) hasta la primera pantalla usab
 
 | Medición | React Native | Flutter |
 |----------|--------------|---------|
-| Promedio (≥ 5 runs) | | |
-| Dispositivo / emulador | | |
+| Promedio (≥ 5 runs) | 2.1 s| 1.8 s|
+
+Ambos se probaron en emuladores, pero claro esto está muy sujeto al equipo utilizado
 
 ---
 
 ## Análisis comparativo (borrador)
 
-_Espacio para la conclusión del informe: facilidad de desarrollo, curva de aprendizaje, rendimiento percibido, tamaño del bundle, ecosistema, etc._
+Durante el desarrollo de ambas aplicaciones se observó que la facilidad de uso y la curva de aprendizaje dependen en gran medida de la experiencia previa del equipo. Nosotros ya contabamos con conocimientos de TypeScript y React, por lo que la adaptación a React Native resultó más natural y requirió menos tiempo de aprendizaje.
+
+En cuanto a la experiencia de desarrollo, React Native presentó ventajas al utilizar Expo Go, ya que permitió ejecutar y probar la aplicación de forma rápida sin configuraciones complejas. Además, durante las pruebas de consumo de APIs no se presentaron inconvenientes relacionados con restricciones de CORS, lo que facilitó el desarrollo y la depuración.
+
+Por otro lado, Flutter ofreció una experiencia más integrada en el proceso de generación de aplicaciones para distribución. Aunque los tiempos de compilación inicial fueron superiores, la generación del APK resultó más directa y consistente, con menos dependencias externas y una configuración más centralizada dentro del propio framework.
+
+Respecto al rendimiento percibido, ambas aplicaciones mostraron una experiencia fluida en la navegación entre pantallas, el desplazamiento de listas y la interacción general con la interfaz. De manera subjetiva, la versión desarrollada con React Native presentó una sensación ligeramente más ágil durante el uso cotidiano; sin embargo, las diferencias observadas no fueron lo suficientemente significativas como para concluir una superioridad clara de un framework sobre el otro.
+
+Ambos frameworks demostraron ser alternativas maduras y capaces para el desarrollo multiplataforma. React Native puede resultar especialmente atractivo para equipos con experiencia previa en el ecosistema JavaScript y React, mientras que Flutter ofrece una solución más integrada y homogénea para la construcción y distribución de aplicaciones. La elección entre uno u otro dependerá principalmente de los conocimientos previos del equipo, los requisitos del proyecto y las preferencias del flujo de trabajo.
 
 ---
 
@@ -140,7 +129,6 @@ _Espacio para la conclusión del informe: facilidad de desarrollo, curva de apre
 
 - Los comentarios CRUD **no** llaman a IGDB; solo viven en RAM.
 - Los GET de juegos y eventos **sí** usan la API real para poder medir latencia de red.
-- La app Lynx original (`lynxjsDemo`) sirve como referencia de UI y queries; no incluye CRUD de comentarios.
 
 ---
 

@@ -2,8 +2,6 @@
 
 Proyecto de la asignatura de desarrollo móvil: la misma aplicación implementada en **React Native (Expo)** y **Flutter**, con el fin de comparar rendimiento, tiempos de desarrollo y experiencia técnica.
 
-Referencia original: `lynxjsDemo` (Lynx JS).
-
 ---
 
 ## Contenido del repositorio
@@ -93,8 +91,8 @@ flutter build apk --debug
 
 | Plataforma | Tamaño | Notas |
 |------------|--------|--------|
-| React Native | _pendiente_ | `eas build` / build release local |
-| Flutter | _pendiente_ | `flutter build apk --release` |
+| React Native | 45.3 MB | `eas build` / build release local |
+| Flutter | 47.45 MB | `flutter build apk --release` |
 
 ### 2. Tiempo de respuesta API
 

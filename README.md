@@ -45,6 +45,7 @@ Abrir con **Expo Go** escaneando el QR (misma red Wi‑Fi).
 ### GamesExplorer Flutter
 
 **No ejecutar en Chrome/Edge (web) sin antes descargar una extension para evitar el bloqueo por CORS:** IGDB bloquea las peticiones por CORS → `ClientException: Failed to fetch`.
+La puedes descargar aqui: https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?pli=1
 
 ```bash
 cd FlutterComparationDemo

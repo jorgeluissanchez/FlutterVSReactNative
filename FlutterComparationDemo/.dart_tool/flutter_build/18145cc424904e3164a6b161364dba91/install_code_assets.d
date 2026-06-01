@@ -1,0 +1,1 @@
+ D:\\Desktop\\Universidad\\noveno\ semestre\\movil\\FlutterComparationDemo\\.dart_tool\\flutter_build\\18145cc424904e3164a6b161364dba91\\native_assets.json: 

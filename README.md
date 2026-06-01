@@ -52,8 +52,6 @@ flutter pub get
 flutter run 
 ```
 
-O en Android: `flutter run -d android`
-
 APK debug (opcional):
 
 ```bash
